@@ -20,7 +20,7 @@ answerModel.getAnswersType = (callback, reqid)=>{
 
 answerModel.add = (callback, data)=>{
     if(connection){
-        connection.query('call spSubmitFormAnswers(?,?,?)', [data.iIdQuestion, data.iIdAnswer, data.iIdSession], (err, rows)=>{
+        connection.query('call spSubmitFormAnswers(?,?,?,?)', [data.iIdQuestion, data.iIdAnswer, data.idTypeResult, data.iIdSession], (err, rows)=>{
             if(err) callback(null, err)
             else callback(null, rows)
         })

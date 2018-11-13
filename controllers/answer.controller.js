@@ -19,9 +19,9 @@ answerController.add = (req, res)=>{
     const answerdata = {
         iIdQuestion : req.body.id,
         iIdAnswer : req.body.idA,
-        iIdSession : req.body.cookie
+        iIdSession : req.body.cookie,
+        idTypeResult : req.body.result
     }
-    console.log(answerdata);
     answerModel.add((err, answer)=>{
         res.json(answer);
     }, answerdata);
