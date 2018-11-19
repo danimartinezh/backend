@@ -36,9 +36,11 @@ app.use(function (req, res, next) {
 //Rutas
 const question_route = require('./routes/question.route')
 const answer_route = require('./routes/answer.route')
+const advice_route = require('./routes/advice.route')
 
 app.use('/api/v1/questions', question_route)
 app.use('/api/v1/answer', answer_route)
+app.use('/api/v1/advice', advice_route)
 
 const httpServer = http.createServer(app)
 const httpsServer = https.createServer(options,app)
