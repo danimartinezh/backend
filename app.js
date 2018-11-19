@@ -1,11 +1,21 @@
 //Manuales
 
 //Constantes & librerias
+const fs = require('fs')
 const express = require('express')
+const http = require('http')
+const https = require('https')
 const app = express()
 const morgan = require('morgan')
 const config = require('./config')
-//const mysql = require('mysql')
+let privateKey = fs.readFileSync('ca.key')
+let cert = fs.readFileSync('ca.crt')
+
+let options = {
+    key: privateKey,
+    cert: cert
+}
+
 global.connection = require('./db')
 
 //Middleware
@@ -30,6 +40,12 @@ const answer_route = require('./routes/answer.route')
 app.use('/api/v1/questions', question_route)
 app.use('/api/v1/answer', answer_route)
 
-app.listen(config.site.PORT, () => {
+const httpServer = http.createServer(app)
+const httpsServer = https.createServer(options,app)
+
+httpsServer.listen(config.site.PORT, ()=>{
     console.log('Servidor ON :' + config.site.PORT)
 })
+/* app.listen(config.site.PORT, () => {
+    console.log('Servidor ON :' + config.site.PORT)
+}) */
